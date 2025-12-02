@@ -277,7 +277,7 @@ This project is licensed under the MIT License.
 ## 👨‍💻 Author
 
 **Your Name**
-- GitHub: [@yourusername](https://github.com/something111-del)
+- GitHub: (https://github.com/something111-del) 
 
 ## 🙏 Acknowledgments
 - Mapbox for the interactive map API
