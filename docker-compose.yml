@@ -1,0 +1,45 @@
+version: "3.8"
+
+services:
+  mongo:
+    image: mongo:6
+    container_name: gocamp_mongo
+    restart: always
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+
+  backend:
+    build: ./backend
+    container_name: gocamp_backend
+    restart: always
+    env_file:
+      - .env
+    ports:
+      - "5001:5001"
+    depends_on:
+      - mongo
+
+  frontend:
+    build: ./frontend
+    container_name: gocamp_frontend
+    restart: always
+    ports:
+      - "3000:3000"
+    environment:
+      - REACT_APP_MAPBOX_TOKEN=${REACT_APP_MAPBOX_TOKEN}
+    depends_on:
+      - backend
+
+  go-chatbot:
+    build: ./go-chatbot
+    container_name: gocamp_go_chatbot
+    restart: always
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mongo
+
+volumes:
+  mongo_data:
