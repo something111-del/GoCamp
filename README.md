@@ -225,27 +225,27 @@ Secure invitation system for onboarding new administrators:
 
 ## 🧪 Testing
 
-### Manual Testing Checklist
-- [ ] User registration and login
-- [ ] Campground CRUD operations
-- [ ] Map interactions (zoom, pan, marker clicks)
-- [ ] Live chat initiation and message exchange
-- [ ] Chat timeout and fallback to query form
-- [ ] Email notifications for live chat requests
-- [ ] Chat history search functionality
-- [ ] Role-based access control
+## UAT
+User registration and login
+Campground CRUD operations
+Map interactions (zoom, pan, marker clicks)
+Live chat initiation and message exchange
+Chat timeout and fallback to query form
+Email notifications for live chat requests
+Chat history search functionality
+Role-based access control
 
 ## 🔒 Security Considerations
 
 ### Production Checklist
-- [ ] Change `JWT_SECRET` to a strong, random value
-- [ ] Restrict CORS origins in `websocketHandler.go`
-- [ ] Use environment-specific `.env` files
-- [ ] Enable HTTPS/TLS for WebSocket connections
-- [ ] Implement rate limiting on API endpoints
-- [ ] Add WebSocket authentication (JWT validation)
-- [ ] Sanitize user inputs
-- [ ] Use Gmail App Passwords (not account password)
+Change `JWT_SECRET` to a strong, random value
+Restrict CORS origins in `websocketHandler.go`
+Use environment-specific `.env` files
+Enable HTTPS/TLS for WebSocket connections
+Implement rate limiting on API endpoints
+Add WebSocket authentication (JWT validation)
+Sanitize user inputs
+Use Gmail App Passwords (not account password)
 
 ## 🚢 Deployment
 
