@@ -31,7 +31,7 @@ const AdminInvite = () => {
 
         try {
             const token = localStorage.getItem('token');
-            const response = await axios.post(
+            await axios.post(
                 'http://localhost:5001/api/admin/invite',
                 { email },
                 { headers: { Authorization: `Bearer ${token}` } }

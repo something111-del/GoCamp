@@ -16,6 +16,7 @@ const InviteRegistration = () => {
 
     useEffect(() => {
         verifyToken();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [token]);
 
     const verifyToken = async () => {
