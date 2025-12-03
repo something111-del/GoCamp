@@ -1,0 +1,70 @@
+name: Deploy to Google Cloud
+
+on:
+  push:
+    branches:
+      - main
+
+env:
+  PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
+  REGION: us-central1
+  BACKEND_SERVICE: gocamp-backend
+
+jobs:
+  deploy-backend:
+    runs-on: ubuntu-latest
+    outputs:
+      backend_url: ${{ steps.deploy.outputs.url }}
+    steps:
+      - uses: actions/checkout@v3
+
+      - id: "auth"
+        uses: "google-github-actions/auth@v1"
+        with:
+          credentials_json: "${{ secrets.GCP_SA_KEY }}"
+
+      - name: Set up Cloud SDK
+        uses: google-github-actions/setup-gcloud@v1
+
+      - name: Configure Docker
+        run: gcloud auth configure-docker
+
+      - name: Build and Push Backend Container
+        run: |
+          docker build -t gcr.io/$PROJECT_ID/$BACKEND_SERVICE:latest ./backend
+          docker push gcr.io/$PROJECT_ID/$BACKEND_SERVICE:latest
+
+      - name: Deploy to Cloud Run
+        id: deploy
+        run: |
+          gcloud run deploy $BACKEND_SERVICE \
+            --image gcr.io/$PROJECT_ID/$BACKEND_SERVICE:latest \
+            --region $REGION \
+            --platform managed \
+            --allow-unauthenticated \
+            --set-env-vars MONGO_URI=${{ secrets.MONGO_URI }},JWT_SECRET=${{ secrets.JWT_SECRET }},CLOUD_NAME=${{ secrets.CLOUD_NAME }},CLOUD_API_KEY=${{ secrets.CLOUD_API_KEY }},CLOUD_API_SECRET=${{ secrets.CLOUD_API_SECRET }} \
+            --format 'value(status.url)' > url.txt
+          echo "url=$(cat url.txt)" >> $GITHUB_OUTPUT
+
+  deploy-frontend:
+    needs: deploy-backend
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Install Dependencies
+        run: cd frontend && npm install
+
+      - name: Build Frontend
+        run: cd frontend && npm run build
+        env:
+          REACT_APP_API_URL: ${{ needs.deploy-backend.outputs.backend_url }}
+          REACT_APP_MAPBOX_TOKEN: ${{ secrets.REACT_APP_MAPBOX_TOKEN }}
+
+      - name: Deploy to Firebase
+        uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: "${{ secrets.GITHUB_TOKEN }}"
+          firebaseServiceAccount: "${{ secrets.FIREBASE_SERVICE_ACCOUNT }}"
+          channelId: live
+          projectId: ${{ secrets.GCP_PROJECT_ID }}

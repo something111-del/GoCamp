@@ -249,17 +249,30 @@ Use Gmail App Passwords (not account password)
 
 ## 🚢 Deployment
 
-### Docker Production Build
-```bash
-docker-compose -f docker-compose.yml up -d --build
-```
+This project is configured for automated deployment using **GitHub Actions**, **Google Cloud Run**, and **Firebase Hosting**.
 
-### Environment Variables
-Ensure all production environment variables are set:
-- Strong `JWT_SECRET`
-- Valid SMTP credentials
-- Cloudinary production account
-- Mapbox production token
+### Architecture
+- **Backend (Node.js)**: Deployed to Google Cloud Run (Serverless Container)
+- **Frontend (React)**: Deployed to Firebase Hosting (CDN)
+- **Database**: MongoDB Atlas (Cloud)
+- **Chatbot (Go)**: *Pending deployment*
+
+### CI/CD Pipeline
+Every push to the `main` branch triggers the following workflow:
+1. **Backend Build**: Docker image is built and pushed to Google Container Registry (GCR).
+2. **Backend Deploy**: Image is deployed to Cloud Run.
+3. **Frontend Build**: React app is built, injecting the new Backend URL.
+4. **Frontend Deploy**: Static assets are deployed to Firebase Hosting.
+
+### Setup Requirements
+To deploy your own instance, you need to set the following **GitHub Secrets**:
+- `GCP_PROJECT_ID`: Your Google Cloud Project ID
+- `GCP_SA_KEY`: Google Cloud Service Account JSON Key
+- `FIREBASE_SERVICE_ACCOUNT`: Same as GCP_SA_KEY (with Firebase Admin role)
+- `MONGO_URI`: MongoDB Atlas connection string
+- `JWT_SECRET`: Secret key for authentication
+- `CLOUD_NAME`, `CLOUD_API_KEY`, `CLOUD_API_SECRET`: Cloudinary credentials
+- `REACT_APP_MAPBOX_TOKEN`: Mapbox API token
 
 ## 🤝 Contributing
 

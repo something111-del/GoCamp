@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-const CHATBOT_API = 'http://localhost:8080';
-const BACKEND_API = 'http://localhost:5001/api';
+const CHATBOT_API = process.env.REACT_APP_CHATBOT_URL || 'http://localhost:8080';
+const BACKEND_API = (process.env.REACT_APP_API_URL || 'http://localhost:5001') + '/api';
 
 export const submitChatQuery = (data) => axios.post(`${CHATBOT_API}/chatbot`, data);
 export const getChatQueries = () => axios.get(`${CHATBOT_API}/queries`);
