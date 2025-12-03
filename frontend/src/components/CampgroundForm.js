@@ -23,7 +23,7 @@ const CampgroundForm = () => {
         if (form.image) data.append('image', form.image);
 
         try {
-            await axios.post('http://localhost:5001/api/campgrounds', data);
+            await axios.post(`${process.env.REACT_APP_API_URL || 'http://localhost:5001'}/api/campgrounds`, data);
             setShowSuccess(true);
             setForm({ name: '', location: '', description: '', image: null });
             setTimeout(() => setShowSuccess(false), 3000);

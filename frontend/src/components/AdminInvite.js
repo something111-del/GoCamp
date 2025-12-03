@@ -15,7 +15,7 @@ const AdminInvite = () => {
     const fetchPendingInvites = async () => {
         try {
             const token = localStorage.getItem('token');
-            const response = await axios.get('http://localhost:5001/api/admin/pending', {
+            const response = await axios.get(`${process.env.REACT_APP_API_URL || 'http://localhost:5001'}/api/admin/pending`, {
                 headers: { Authorization: `Bearer ${token}` }
             });
             setPendingInvites(response.data);
@@ -32,7 +32,7 @@ const AdminInvite = () => {
         try {
             const token = localStorage.getItem('token');
             await axios.post(
-                'http://localhost:5001/api/admin/invite',
+                `${process.env.REACT_APP_API_URL || 'http://localhost:5001'}/api/admin/invite`,
                 { email },
                 { headers: { Authorization: `Bearer ${token}` } }
             );

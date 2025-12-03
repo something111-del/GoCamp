@@ -18,7 +18,7 @@ const CampgroundList = () => {
 
     const fetchCampgrounds = async () => {
         try {
-            const res = await axios.get('http://localhost:5001/api/campgrounds');
+            const res = await axios.get(`${process.env.REACT_APP_API_URL || 'http://localhost:5001'}/api/campgrounds`);
             setCampgrounds(res.data);
         } catch (err) {
             console.error(err);

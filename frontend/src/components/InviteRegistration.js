@@ -21,7 +21,7 @@ const InviteRegistration = () => {
 
     const verifyToken = async () => {
         try {
-            const response = await axios.get(`http://localhost:5001/api/admin/verify-token/${token}`);
+            const response = await axios.get(`${process.env.REACT_APP_API_URL || 'http://localhost:5001'}/api/admin/verify-token/${token}`);
             if (response.data.valid) {
                 setTokenValid(true);
                 setEmail(response.data.email);
@@ -50,7 +50,7 @@ const InviteRegistration = () => {
         setSubmitting(true);
 
         try {
-            const response = await axios.post('http://localhost:5001/api/admin/complete-invite', {
+            const response = await axios.post(`${process.env.REACT_APP_API_URL || 'http://localhost:5001'}/api/admin/complete-invite`, {
                 token,
                 password
             });
