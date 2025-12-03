@@ -18,9 +18,10 @@ const ConsultantDashboard = () => {
         const fetchQueries = async () => {
             try {
                 const res = await getChatQueries();
-                setQueries(res.data);
+                setQueries(res.data || []); // Ensure it's always an array
             } catch (err) {
                 console.error('Error fetching queries:', err);
+                setQueries([]); // Set empty array on error
             } finally {
                 setLoading(false);
             }
