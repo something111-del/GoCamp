@@ -17,7 +17,7 @@ const AdminChatDashboard = () => {
 
     const fetchSessions = async () => {
         try {
-            const res = await fetch('http://localhost:8080/chat/sessions');
+            const res = await fetch(`${process.env.REACT_APP_CHATBOT_URL || 'http://localhost:8080'}/chat/sessions`);
             const data = await res.json();
             setSessions(data || []);
         } catch (err) {
@@ -37,7 +37,8 @@ const AdminChatDashboard = () => {
         setActiveSession(session);
         setMessages(session.messages || []);
 
-        const ws = new WebSocket('ws://localhost:8080/ws');
+        const wsUrl = (process.env.REACT_APP_CHATBOT_URL || 'http://localhost:8080').replace('http', 'ws');
+        const ws = new WebSocket(`${wsUrl}/ws`);
         wsRef.current = ws;
 
         ws.onopen = () => {

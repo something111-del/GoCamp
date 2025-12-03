@@ -37,7 +37,8 @@ const LiveChat = () => {
     }, []);
 
     const connectWebSocket = () => {
-        const ws = new WebSocket('ws://localhost:8080/ws');
+        const wsUrl = (process.env.REACT_APP_CHATBOT_URL || 'http://localhost:8080').replace('http', 'ws');
+        const ws = new WebSocket(`${wsUrl}/ws`);
         wsRef.current = ws;
 
         ws.onopen = () => {
