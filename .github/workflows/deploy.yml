@@ -27,18 +27,18 @@ jobs:
         uses: google-github-actions/setup-gcloud@v1
 
       - name: Configure Docker
-        run: gcloud auth configure-docker
+        run: gcloud auth configure-docker us-central1-docker.pkg.dev
 
       - name: Build and Push Backend Container
         run: |
-          docker build -t gcr.io/$PROJECT_ID/$BACKEND_SERVICE:latest ./backend
-          docker push gcr.io/$PROJECT_ID/$BACKEND_SERVICE:latest
+          docker build -t us-central1-docker.pkg.dev/$PROJECT_ID/gocamp-repo/$BACKEND_SERVICE:latest ./backend
+          docker push us-central1-docker.pkg.dev/$PROJECT_ID/gocamp-repo/$BACKEND_SERVICE:latest
 
       - name: Deploy to Cloud Run
         id: deploy
         run: |
           gcloud run deploy $BACKEND_SERVICE \
-            --image gcr.io/$PROJECT_ID/$BACKEND_SERVICE:latest \
+            --image us-central1-docker.pkg.dev/$PROJECT_ID/gocamp-repo/$BACKEND_SERVICE:latest \
             --region $REGION \
             --platform managed \
             --allow-unauthenticated \
