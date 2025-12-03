@@ -4,6 +4,7 @@ import (
 	"context"
 	"encoding/json"
 	"net/http"
+	"os"
 	"regexp"
 	"time"
 
@@ -19,8 +20,13 @@ var chatSessionsCollection *mongo.Collection
 func InitMongo() {
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
-	// Using "mongo" as the hostname because of docker-compose service name
-	client, _ = mongo.Connect(ctx, options.Client().ApplyURI("mongodb://mongo:27017"))
+	
+	mongoURI := os.Getenv("MONGO_URI")
+	if mongoURI == "" {
+		mongoURI = "mongodb://mongo:27017" // Default for local development
+	}
+	
+	client, _ = mongo.Connect(ctx, options.Client().ApplyURI(mongoURI))
 	collection = client.Database("gocamp").Collection("chatqueries")
 	chatSessionsCollection = client.Database("gocamp").Collection("chatsessions")
 	
