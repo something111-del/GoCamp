@@ -96,21 +96,21 @@ A full-stack web application for discovering and managing campgrounds with real-
    MONGO_URI=mongodb://mongo:27017/gocamp
    
    # JWT Secret
-   JWT_SECRET=your_super_secret_jwt_key_change_this_in_production
+   JWT_SECRET=super_secret_jwt_key_
    
    # Cloudinary (for image uploads)
-   CLOUDINARY_CLOUD_NAME=your_cloudinary_cloud_name
-   CLOUDINARY_API_KEY=your_cloudinary_api_key
-   CLOUDINARY_API_SECRET=your_cloudinary_api_secret
+   CLOUDINARY_CLOUD_NAME=cloudinary_cloud_name
+   CLOUDINARY_API_KEY=cloudinary_api_key
+   CLOUDINARY_API_SECRET=cloudinary_api_secret
    
    # Mapbox
-   REACT_APP_MAPBOX_TOKEN=your_mapbox_access_token
+   REACT_APP_MAPBOX_TOKEN=mapbox_access_token
    
    # SMTP Configuration (for live chat notifications)
    SMTP_HOST=smtp.gmail.com
    SMTP_PORT=587
-   SMTP_USER=your_email@gmail.com
-   SMTP_PASS=your_gmail_app_password
+   SMTP_USER=email@gmail.com
+   SMTP_PASS=gmail_app_password
    ADMIN_EMAIL=admin@gocamp.com
    ```
 
@@ -237,16 +237,6 @@ Role-based access control
 
 ## 🔒 Security Considerations
 
-### Production Checklist
-Change `JWT_SECRET` to a strong, random value
-Restrict CORS origins in `websocketHandler.go`
-Use environment-specific `.env` files
-Enable HTTPS/TLS for WebSocket connections
-Implement rate limiting on API endpoints
-Add WebSocket authentication (JWT validation)
-Sanitize user inputs
-Use Gmail App Passwords (not account password)
-
 ## 🚢 Deployment
 
 This project is configured for automated deployment using **GitHub Actions**, **Google Cloud Run**, and **Firebase Hosting**.
@@ -265,8 +255,8 @@ Every push to the `main` branch triggers the following workflow:
 4. **Frontend Deploy**: Static assets are deployed to Firebase Hosting.
 
 ### Setup Requirements
-To deploy your own instance, you need to set the following **GitHub Secrets**:
-- `GCP_PROJECT_ID`: Your Google Cloud Project ID
+To deploy own instance,set the following **GitHub Secrets**:
+- `GCP_PROJECT_ID`: Google Cloud Project ID
 - `GCP_SA_KEY`: Google Cloud Service Account JSON Key
 - `FIREBASE_SERVICE_ACCOUNT`: Same as GCP_SA_KEY (with Firebase Admin role)
 - `MONGO_URI`: MongoDB Atlas connection string
@@ -289,7 +279,6 @@ This project is licensed under the MIT License.
 
 ## 👨‍💻 Author
 
-**Your Name**
 - GitHub: (https://github.com/something111-del) 
 
 ## 🙏 Acknowledgments
