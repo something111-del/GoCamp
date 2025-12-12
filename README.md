@@ -1,4 +1,4 @@
-# 🏕️ GoCamp - Campground Discovery Platform
+#  GoCamp - Campground Discovery Platform
 
 A full-stack web application for discovering and managing campgrounds with real-time live chat support. Built with a modern microservices architecture using React, Node.js, Go, and MongoDB.
 
@@ -6,7 +6,7 @@ A full-stack web application for discovering and managing campgrounds with real-
 
 **Try it now**: [GoCamp Live](https://gocamp-480117.web.app/)
 
-## 🌟 Features
+##  Features
 
 ### Core Functionality
 - **Interactive Map Interface**: Explore campgrounds on an interactive Mapbox GL map with custom markers
@@ -27,7 +27,7 @@ A full-stack web application for discovering and managing campgrounds with real-
 - **Visual Stability**: No marker drift during zoom, reduced repaints/reflows
 - **Glassmorphism Effects**: Modern, premium aesthetic with smooth transitions
 
-## 🏗️ Architecture
+##  Architecture
 
 ### Microservices Design
 ```
@@ -76,7 +76,7 @@ A full-stack web application for discovering and managing campgrounds with real-
 - Multi-container orchestration
 - Volume persistence
 
-## 🚀 Getting Started
+##  Getting Started
 
 ### Prerequisites
 - Docker & Docker Compose installed
@@ -237,9 +237,9 @@ Email notifications for live chat requests
 Chat history search functionality
 Role-based access control
 
-## 🔒 Security Considerations
+##  Security Considerations
 
-## 🚢 Deployment
+##  Deployment
 
 This project is configured for automated deployment using **GitHub Actions**, **Google Cloud Run**, and **Firebase Hosting**.
 
@@ -266,7 +266,7 @@ To deploy own instance,set the following **GitHub Secrets**:
 - `CLOUD_NAME`, `CLOUD_API_KEY`, `CLOUD_API_SECRET`: Cloudinary credentials
 - `REACT_APP_MAPBOX_TOKEN`: Mapbox API token
 
-## 🤝 Contributing
+## Contributing
 
 Contributions are welcome! Please follow these steps:
 1. Fork the repository
@@ -275,15 +275,15 @@ Contributions are welcome! Please follow these steps:
 4. Push to the branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
 
-## 📝 License
+## License
 
 This project is licensed under the MIT License.
 
-## 👨‍💻 Author
+## Author
 
 - GitHub: (https://github.com/something111-del) 
 
-## 🙏 Acknowledgments
+## Acknowledgments
 - Mapbox for the interactive map API
 - Cloudinary for image hosting
 - MongoDB for flexible data storage
@@ -291,4 +291,4 @@ This project is licensed under the MIT License.
 
 ---
 
-**Built with ❤️ using React, Node.js, Go, and MongoDB**
+**Built using React, Node.js, Go, and MongoDB**
